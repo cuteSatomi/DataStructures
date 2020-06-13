@@ -117,16 +117,35 @@ public class EmpLinkedList {
                 flag = true;
                 break;
             }
+            //使用preEmp来记录当前的节点位置
             preEmp = curEmp;
+            //将curEmp后移一位
             curEmp = curEmp.next;
         }
 
         if (flag) {
-            //flag为true，说明找到，将当前节点的下一个节点指向后一个节点，即将所给id的雇员删除
-            if (preEmp == head && curEmp == null) {
-                preEmp = null;
-            } else {
-                curEmp.next = curEmp.next.next;
+            /*
+                flag为true，说明找到，此时分两种情况来考虑
+                    1。找到的雇员是链表的头节点
+                    2。找到的雇员不是链表的头节点
+             */
+            if (curEmp == head) {
+                /*
+                    如果找到的雇员是当前链表的头节点，此时又得分两种情况来考虑
+                        1。该链表的长度为1，即找到的节点就是该链表唯一的节点
+                        2。该链表的长度不为1
+                 */
+                if (curEmp.next == null) {
+                    //如果当前节点的下一节点为null，而当前节点又为头节点，说明该链表的长度为1
+                    //所以此时只需要将head置为null即可
+                    head = null;
+                } else {
+                    //如果当前链表的长度大于1，则只需要将head节点的next指向curEmp的next即可
+                    head = curEmp.next;
+                }
+            }else {
+                //如果找到的雇员不是头节点，则说明该链表长度一定大于1，所以无需考虑空指针问题，直接将当前节点的上一节点的next指向当前节点的下一节点即可
+                preEmp.next = curEmp.next;
             }
             System.out.println("id为" + id + "的雇员已成功删除");
         } else {
