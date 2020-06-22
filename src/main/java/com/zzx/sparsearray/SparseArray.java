@@ -38,7 +38,8 @@ public class SparseArray {
         sparseArray[0][1] = 11;
         sparseArray[0][2] = sum;
         //遍历二维数组，将非零数据放入稀疏数组中
-        int count = 0;//定义count用于记录第几个非零数据
+        //定义count用于记录第几个非零数据
+        int count = 0;
         for (int i = 0; i < chessArr1.length; i++) {
             for (int j = 0; j < chessArr1[i].length; j++) {
                 if (chessArr1[i][j] != 0) {
